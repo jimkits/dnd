@@ -1,18 +1,20 @@
 import './App.css';
-// import ReactLogo from "./components/ReactLogo";
-import SideNav from "./components/SideNav";
+import SideNav from "./components/Navigation";
+import Header from "./components/Header";
+import HomePage from './components/Home';
 
 function App() {
   return (
-    <>
-      <div className="App">
-        {/* <ReactLogo /> */}
-        This is the main page
-      </div>
-      <div className="nav-menu" style={{ position: "relative" }}>
+    <div className='app'>
+      <div className='flex-left'>
         <SideNav />
       </div>
-    </>
+      <div className='flex-center'>
+        <Header />
+        <HomePage />
+      </div>
+      {/* <div className="flex-right"></div> */}
+    </div>
   );
 }
 
