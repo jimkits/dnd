@@ -1,8 +1,10 @@
 import './style.css';
+import dragon from "../../assets/img-dragon.gif"
 
 function Home() {
     return (
         <div className="flex-centre-bottom" >
+            <br />
             <h2>
                 Welcome to the world of
             </h2>
@@ -10,9 +12,7 @@ function Home() {
                 Dungeons and Dragons
             </h1>
             <br />
-            <h2>
-                This page is still under construction.
-            </h2>
+            <img className='img-dragon' src={dragon} alt="dragon" />
         </div>
     );
 }

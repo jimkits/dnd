@@ -2,19 +2,26 @@ import './style.css';
 import { useState } from "react"
 import ListParents from "../Lists"
 import NavListItems from "../../data/NavListItems"
-import pressed from "../../assets/nav-button-pressed.png"
-import unpressed from "../../assets/nav-button-unpressed.png"
+import redDragonEyeOpening from "../../assets/img-red-dragon-eye-opening.gif"
+import redDragonEyeClosing from "../../assets/img-red-dragon-eye-closing.gif"
+import WaitToSetState from '../../helpers/waitToSetState';
 
 const SideNav = () => {
     const [navOpen, setNavOpen] = useState(false);
+    const [clicked, setClicked] = useState(false);
 
-    const navButtonImage = navOpen ? pressed : unpressed;
+    const navButtonImage = navOpen ? redDragonEyeOpening : redDragonEyeClosing;
     const navSidebarName = navOpen ? "nav-sidebar-open" : "nav-sidebar-closed";
 
     return (
         <>
-            <button type="button" className="btn-nav" onClick={() => setNavOpen(!navOpen)}>
-                <img className="btn-nav-img" src={navButtonImage} alt="nav img" />
+            <button type="button" className="btn-nav" disabled={clicked}
+                onClick={() => {
+                    setClicked(true);
+                    WaitToSetState(setClicked, false, 900);
+                    setNavOpen(!navOpen);
+                }}>
+                <img className="img-dragon-eye" src={navButtonImage} alt="dragons-eye" />
             </button>
             <div className={navSidebarName}>
                 {NavListItems.map((item) => {
