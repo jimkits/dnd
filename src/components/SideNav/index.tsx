@@ -1,10 +1,11 @@
-import './style.css';
 import { useState } from "react"
-import ListParents from "../Lists"
-import NavListItems from "../../data/NavListItems"
+import './style.css';
+import List from "./ListParents"
+import HeroesList from "../../data/HeroesList"
+import MonsterList from "../../data/MonsterSize"
 import redDragonEyeOpening from "../../assets/img-red-dragon-eye-opening.gif"
 import redDragonEyeClosing from "../../assets/img-red-dragon-eye-closing.gif"
-import WaitToSetState from '../../helpers/waitToSetState';
+import WaitToSetState from '../../helpers/WaitToSetState';
 
 const SideNav = () => {
     const [navOpen, setNavOpen] = useState(false);
@@ -24,8 +25,11 @@ const SideNav = () => {
                 <img className="img-dragon-eye" src={navButtonImage} alt="dragons-eye" />
             </button>
             <div className={navSidebarName}>
-                {NavListItems.map((item) => {
-                    return <ListParents key={item.name} item={item} />
+                {HeroesList.map((item) => {
+                    return <List key={item.name} item={item} />
+                })}
+                {MonsterList.map((item) => {
+                    return <List key={item.name} item={item} />
                 })}
             </div>
         </>

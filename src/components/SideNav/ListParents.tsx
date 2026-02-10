@@ -1,12 +1,11 @@
-import { useState } from "react";
+import { Link } from "react-router";
 
 const ListParents = ({ item }: any) => {
-    const [itemOpen, setItemOpen] = useState(false);
 
     return (
-        <div onClick={() => setItemOpen(!itemOpen)}>
+        <div>
             <h1> {item.name} </h1>
-            {itemOpen && <ListChildren item={item} />}
+            <ListChildren item={item} />
             <br />
         </div>
     )
@@ -14,7 +13,9 @@ const ListParents = ({ item }: any) => {
 
 const ListChildren = ({ item }: any) => {
     return item.submenu.map((submenu: any) => (
-        <h2 key={submenu.name}> {submenu.name} </h2>
+        <Link key={submenu.name} to={submenu.path} state={{ name: submenu.name }}>
+            <h2> {submenu.name} </h2>
+        </Link>
     ));
 };
 
