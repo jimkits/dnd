@@ -1,0 +1,56 @@
+.monster-list h1{
+    text-align: left;
+}
+
+.monster-list h2{
+    text-align: left;
+    line-height: 30px;
+}
+
+.monster-list h3{
+    text-align: left;
+    line-height: 30px;
+}
+
+.monster-details-display{
+    border: solid 2px;
+    border-color: #74111B;
+    border-width: 0 0 0 2px;
+    display: flex;
+    direction: row;
+}
+
+.monster-description{
+  align-self: right;
+}
+
+.monster-stats{
+  align-self: right;
+}
+
+.monster-stats{
+  align-self: right;
+}
+
+.monster-details-hidden{
+  height: 0px;
+  width: 0px;
+  overflow-x: hidden;
+}
+
+.arrow {
+  border: solid #C58250;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding:3px;
+}
+
+.right {
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+}
+
+.down {
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+}

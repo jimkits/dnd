@@ -1,0 +1,33 @@
+.app{
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: #464956;
+  overflow: auto;
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-right{
+  width: 250px;
+  align-self: flex-end;
+  border: #C08423;
+  border-width: 2px;
+}
+
+.app h1{
+  color: #C08423;
+  line-height: 25px;
+}
+
+.app h2{
+  color: #C58250;
+  margin-left: 20px;
+  line-height: 15px;
+}
+
+.app h3{
+  color: #c29c7f;
+  margin-left: 40px;
+  line-height: 15px;
+}

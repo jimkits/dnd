@@ -1,0 +1,33 @@
+.flex-left{
+  width: 250px;
+  align-self: flex-start;
+  display: flex;
+  flex-direction: column;
+  border-width: 1px;
+  border-right-color: aliceblue;
+}
+
+.btn-nav{
+  margin-top: 40px;
+  background-color: #464956;
+  border: 0px;
+  align-self: flex-start;
+}
+
+.nav-sidebar-open{
+  background-color: #464956;
+  text-decoration-color: azure;
+  align-self: auto;
+}
+
+.nav-sidebar-closed{
+  height: 0%;
+  width: 0%;
+  overflow-x: hidden;
+  align-self: auto;
+}
+
+.img-dragon-eye{
+  width: 150px;
+  height: 150px;
+}

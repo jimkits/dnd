@@ -1,0 +1,34 @@
+.hero{
+    display: flex;
+    flex-direction: column;
+}
+
+.hero h1{
+    text-align: left;
+}
+
+.hero h2{
+    text-align: left;
+    line-height: 30px;
+}
+
+.txt-hero{
+    align-self: center;
+}
+
+.hero-details{
+    width: 100vmin;
+    align-self: center;
+    display: flex;
+    flex-direction: row;
+}
+
+.img-hero{
+    height: 600px;
+    width: 400px;
+    align-self: flex-start;
+}
+
+.txt-hero-description{
+    align-self: flex-start;
+}
