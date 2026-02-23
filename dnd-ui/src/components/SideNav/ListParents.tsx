@@ -13,7 +13,7 @@ const ListParents = ({ item }: any) => {
 
 const ListChildren = ({ item }: any) => {
     return item.submenu.map((submenu: any) => (
-        <Link key={submenu.name} to={submenu.path} state={{ name: submenu.name }}>
+        <Link className="nav-link" key={submenu.name} to={submenu.path} state={{ name: submenu.name }}>
             <h2> {submenu.name} </h2>
         </Link>
     ));

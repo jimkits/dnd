@@ -1,0 +1,29 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dnd-api", "dnd-api", "{2EBA8B1A-4B2A-BCA6-EE53-1ED994514F5A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DnD.API", "dnd-api\DnD.API.csproj", "{763B8E4D-8E73-D31E-CB0F-E76BAE5C01A2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{763B8E4D-8E73-D31E-CB0F-E76BAE5C01A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{763B8E4D-8E73-D31E-CB0F-E76BAE5C01A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{763B8E4D-8E73-D31E-CB0F-E76BAE5C01A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{763B8E4D-8E73-D31E-CB0F-E76BAE5C01A2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{763B8E4D-8E73-D31E-CB0F-E76BAE5C01A2} = {2EBA8B1A-4B2A-BCA6-EE53-1ED994514F5A}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3BF7ED9A-63B3-496B-98A5-E7692BA2661B}
+	EndGlobalSection
+EndGlobal

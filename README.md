@@ -1,37 +1,36 @@
 # Dungeons & Dragons Compendium
 
-A React web app for browsing D&D heroes and monsters. Features an animated dragon-eye sidebar navigation, hero detail pages (Fighter, Sorcerer, Cleric, Rogue), and monster listings by size category (Small, Medium, Large).
+A full-stack D&D compendium with a React frontend and ASP.NET Core API backend. Browse heroes and monsters with animated navigation, character art, and detailed game statistics.
 
-## Tech Stack
+## Projects
 
-- React 19 with TypeScript
-- React Router 7
-- Bootstrap 5
-- Create React App
+| Project    | Description              | Port                  |
+| ---------- | ------------------------ | --------------------- |
+| `dnd-api`  | ASP.NET Core REST API    | `http://localhost:5071` |
+| `dnd-ui`   | React frontend           | `http://localhost:3000` |
 
 ## Getting Started
 
+### Prerequisites
+
+- .NET 10.0 SDK
+- Node.js
+
+### 1. Start the API
+
 ```bash
+cd dnd-api
+dotnet run
+```
+
+### 2. Start the UI
+
+```bash
+cd dnd-ui
 npm install
 npm start
 ```
 
-The app runs at [http://localhost:3000](http://localhost:3000).
+### 3. Open the app
 
-## Available Scripts
-
-| Command         | Description                |
-| --------------- | -------------------------- |
-| `npm start`     | Run the development server |
-| `npm test`      | Run tests                  |
-| `npm run build` | Create a production build  |
-
-## Project Structure
-
-```
-src/
-  assets/         # Images and animations
-  components/
-  data/           # Hero and monster data definitions
-  helpers/        # Utilities for fetching hero/monster details and images
-```
+Navigate to `http://localhost:3000/login` and log in with the credentials configured in `dnd-api/appsettings.Development.json`.
