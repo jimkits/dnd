@@ -4,10 +4,11 @@ A full-stack D&D compendium with a React frontend and ASP.NET Core API backend. 
 
 ## Projects
 
-| Project    | Description              | Port                  |
-| ---------- | ------------------------ | --------------------- |
-| `dnd-api`  | ASP.NET Core REST API    | `http://localhost:5071` |
-| `dnd-ui`   | React frontend           | `http://localhost:3000` |
+| Project        | Description           | Port                    |
+| -------------- | --------------------- | ----------------------- |
+| `dnd-api`      | ASP.NET Core REST API | `http://localhost:5071` |
+| `dnd-ui`       | React frontend        | `http://localhost:3000` |
+| `dnd-ui-tests` | Playwright e2e tests  |                         |
 
 ## Getting Started
 
@@ -34,3 +35,12 @@ npm start
 ### 3. Open the app
 
 Navigate to `http://localhost:3000/login` and log in with the credentials configured in `dnd-api/appsettings.Development.json`.
+
+### 4. Run the tests
+
+```bash
+cd dnd-ui-tests
+npm install
+npx playwright install chromium
+npx playwright test
+```
