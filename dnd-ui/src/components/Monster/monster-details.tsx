@@ -26,39 +26,46 @@ interface Props {
 function MonsterDetails({ monster }: Props) {
     const [display, setDisplay] = useState(false);
 
-    const displayMonster = display ? "monster-details-display" : "monster-details-hidden";
+    const displayMonster = display ? "monster-display" : "monster-hidden";
+    const displayMonsterDetails = display ? "monster-details-display" : "monster-details-hidden";
     const displayArrow = display ? "arrow down" : "arrow right"
 
     return (
-        <div className={'monster-details'}>
-            <h2 data-testid="monster" onClick={() => setDisplay(!display)}>
+        <div key={monster.name} className={displayMonster}>
+            <h2 data-testid="monster-name" onClick={() => setDisplay(!display)}>
                 {monster.name} <i className={displayArrow} />
             </h2>
-            <div className={displayMonster}>
-                <h3 data-testid="monster-description" >
+            <div className={displayMonsterDetails}>
+                <h3 data-testid="monster-description" className="monster-description">
                     {monster.description}
                 </h3>
-                {monster.stats.map((stats) => {
-                    return (
-                        <div data-testid="monster-stats">
-                            <h3> {`AC: ${stats.ArmorClass}`} </h3>
-                            <h3> {`Hit Points: ${stats.HitPoints}`} </h3>
-                            <h3> {`Speed: ${stats.Speed}`} </h3>
-                        </div>
-                    )
-                })}
-                {monster.attributes.map((attributes) => {
-                    return (
-                        <div data-testid="monster-stats">
-                            <h3> {`str: ${attributes.str}`} </h3>
-                            <h3> {`dex: ${attributes.dex}`} </h3>
-                            <h3> {`con: ${attributes.con}`} </h3>
-                            <h3> {`int: ${attributes.int}`} </h3>
-                            <h3> {`wis: ${attributes.wis}`} </h3>
-                            <h3> {`cha: ${attributes.cha}`} </h3>
-                        </div>
-                    )
-                })}
+                <div className="monster-details">
+                    {monster.stats.map((stats) => {
+                        return (
+                            <div data-testid="monster-stats" className="monster-stats">
+                                <div className="stat-row"><span className="stat-label">AC</span><span className="stat-value">{stats.ArmorClass}</span></div>
+                                <div className="stat-row"><span className="stat-label">HP</span><span className="stat-value">{stats.HitPoints}</span></div>
+                                <div className="stat-row"><span className="stat-label">SPEED</span><span className="stat-value">{stats.Speed}</span></div>
+                            </div>
+                        )
+                    })}
+                    {monster.attributes.map((attributes) => {
+                        return (
+                            <>
+                                <div data-testid="monster-abilities" className="monster-abilities">
+                                    <div className="ability-score"><span className="ability-label">STR</span><span className="ability-value">{attributes.str}</span></div>
+                                    <div className="ability-score"><span className="ability-label">DEX</span><span className="ability-value">{attributes.dex}</span></div>
+                                    <div className="ability-score"><span className="ability-label">CON</span><span className="ability-value">{attributes.con}</span></div>
+                                </div>
+                                <div data-testid="monster-abilities" className="monster-abilities">
+                                    <div className="ability-score"><span className="ability-label">INT</span><span className="ability-value">{attributes.int}</span></div>
+                                    <div className="ability-score"><span className="ability-label">WIS</span><span className="ability-value">{attributes.wis}</span></div>
+                                    <div className="ability-score"><span className="ability-label">CHA</span><span className="ability-value">{attributes.cha}</span></div>
+                                </div>
+                            </>
+                        )
+                    })}
+                </div>
             </div>
         </div>
     )

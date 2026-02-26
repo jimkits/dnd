@@ -5,31 +5,107 @@
 .monster-list h2{
     text-align: left;
     line-height: 30px;
+    margin: 0;
+    padding: 6px 0;
+    cursor: pointer;
+}
+
+.monster-list h2:hover {
+    color: #C08423;
 }
 
 .monster-list h3{
     text-align: left;
-    line-height: 30px;
+    line-height: 1.5;
+    margin: 2px 0;
+}
+
+.monster-display{
+    border-left: 2px solid #C08423;
+    padding: 8px 14px;
+    margin-bottom: 10px;
+}
+
+.monster-hidden{
+    padding: 8px 14px;
+    margin-bottom: 10px;
 }
 
 .monster-details-display{
-    border: solid 2px;
-    border-color: #74111B;
-    border-width: 0 0 0 2px;
     display: flex;
-    direction: row;
+    flex-flow: column;
+    padding-top: 6px;
 }
 
 .monster-description{
-  align-self: right;
+    font-style: italic;
+    opacity: 0.85;
 }
 
-.monster-stats{
-  align-self: right;
+.monster-details{
+    display: flex;
+    flex-flow: row;
+    gap: 32px;
+    border-top: 1px solid #C08423;
+    margin-top: 8px;
+    padding-top: 8px;
 }
 
-.monster-stats{
-  align-self: right;
+.monster-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    align-self: flex-start;
+}
+
+.stat-row {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    gap: 8px;
+    border: 1px solid #C08423;
+    border-radius: 3px;
+    padding: 3px 10px;
+}
+
+.stat-label {
+    font-size: 0.7em;
+    font-weight: bold;
+    letter-spacing: 1px;
+    color: #C08423;
+    min-width: 44px;
+}
+
+.stat-value {
+    font-size: 0.85em;
+}
+
+.monster-abilities {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    align-self: flex-start;
+}
+
+.ability-score {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 62px;
+    padding: 3px 8px;
+    border: 1px solid #C08423;
+    border-radius: 3px;
+}
+
+.ability-label {
+    font-size: 0.7em;
+    font-weight: bold;
+    letter-spacing: 1px;
+    color: #C08423;
+}
+
+.ability-value {
+    font-size: 0.85em;
 }
 
 .monster-details-hidden{
@@ -42,7 +118,8 @@
   border: solid #C58250;
   border-width: 0 3px 3px 0;
   display: inline-block;
-  padding:3px;
+  padding: 3px;
+  margin-left: 8px;
 }
 
 .right {
