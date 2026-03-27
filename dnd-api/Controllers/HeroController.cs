@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
+using DnD.API.Data;
 
 namespace DnD.API.Controllers;
 
@@ -6,36 +8,47 @@ namespace DnD.API.Controllers;
 [Route("/api/hero")]
 public class HeroController : ControllerBase
 {
+    private readonly DndDbContext _db;
+    private readonly IWebHostEnvironment _env;
+
+    public HeroController(DndDbContext db, IWebHostEnvironment env)
+    {
+        _db = db;
+        _env = env;
+    }
+
     [HttpGet]
     public IActionResult GetHeroes([FromQuery] Heroes? hero)
     {
-        string fileData;
-
-        switch (hero)
+        if (hero == null)
         {
-            case Heroes.Cleric:
-                fileData = System.IO.File.ReadAllText("Data/Cleric.json");
-                break;
-            case Heroes.Fighter:
-                fileData = System.IO.File.ReadAllText("Data/Fighter.json");
-                break;
-            case Heroes.Rogue:
-                fileData = System.IO.File.ReadAllText("Data/Rogue.json");
-                break;
-            case Heroes.Sorcerer:
-                fileData = System.IO.File.ReadAllText("Data/Sorcerer.json");
-                break;
-            default:
-                fileData = System.IO.File.ReadAllText("Data/HeroNotFound.json");
-                break;
+            return NotFound($"No hero was requested");
         }
 
-        return Content(fileData, "application/json");
+        var heroData = _db.Heroes.FirstOrDefault(h => h.Name == hero.ToString());
+
+        if (heroData == null)
+        {
+            return NotFound($"The hero {hero} is not found");
+        }
+
+        var result = new HeroData
+        {
+            Name = heroData.Name,
+            Description = heroData.Description
+        };
+
+        return Ok(result);
     }
 
     [HttpGet("image")]
     public IActionResult GetHeroImage([FromQuery] Heroes? hero)
     {
+        if (string.IsNullOrEmpty(hero.ToString()))
+        {
+            return NotFound($"No hero was requested");
+        }
+
         string filePath;
 
         switch (hero)
@@ -53,11 +66,13 @@ public class HeroController : ControllerBase
                 filePath = "Data/Images/img-sorcerer.png";
                 break;
             default:
-                filePath = "Data/Images/img-hero-not-found.jpg";
-                break;
+                return NotFound($"The hero {hero} is not found");
         }
 
-        var imageBytes = System.IO.File.ReadAllBytes(filePath);
+        // Build an absolute path for the stored images
+        var fullPath = Path.Combine(_env.ContentRootPath, filePath);
+        var imageBytes = System.IO.File.ReadAllBytes(fullPath);
+
         return File(imageBytes, "image/png");
     }
 }

@@ -9,9 +9,9 @@ public class LoginController : ControllerBase
 {
     private readonly UserStore userStore;
 
-    public LoginController(IConfiguration configuration)
+    public LoginController(UserStore userStore)
     {
-        userStore = new UserStore(configuration);
+        this.userStore = userStore;
     }
 
     [HttpPost]
@@ -25,4 +25,3 @@ public class LoginController : ControllerBase
         return Unauthorized(new { message = "Invalid username or password" });
     }
 }
-

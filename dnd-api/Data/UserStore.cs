@@ -2,23 +2,15 @@ namespace DnD.API.Data;
 
 public class UserStore
 {
-    public UserCredentials[] Users { get; }
+    private readonly DndDbContext _db;
 
-    public UserStore(IConfiguration config)
+    public UserStore(DndDbContext db)
     {
-        var usersSection = config.GetSection("Users");
-
-        Users = usersSection.GetChildren()
-            .Select(section => new UserCredentials
-            {
-                Username = section["Username"] ?? string.Empty,
-                Password = section["Password"] ?? string.Empty
-            })
-            .ToArray();
+        _db = db;
     }
 
     public bool IsValidUser(string username, string password)
     {
-        return Users.Any(u => u.Username == username && u.Password == password);
+        return _db.Users.Any(u => u.Username == username && u.Password == password);
     }
 }

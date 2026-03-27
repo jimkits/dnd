@@ -1,26 +1,9 @@
 import { useState } from "react";
 import "./style.css";
-
-type Monster = {
-    name: string;
-    description: string;
-    stats: {
-        ArmorClass: string;
-        HitPoints: string;
-        Speed: string;
-    }[];
-    attributes: {
-        str: string;
-        dex: string;
-        con: string;
-        int: string;
-        wis: string;
-        cha: string;
-    }[];
-};
+import { MonstersDetails } from "./get-monsters";
 
 interface Props {
-    monster: Monster;
+    monster: MonstersDetails;
 }
 
 function MonsterDetails({ monster }: Props) {
@@ -40,31 +23,48 @@ function MonsterDetails({ monster }: Props) {
                     {monster.description}
                 </h3>
                 <div className="monster-details">
-                    {monster.stats.map((stats) => {
-                        return (
-                            <div data-testid="monster-stats" className="monster-stats">
-                                <div className="stat-row"><span className="stat-label">AC</span><span className="stat-value">{stats.ArmorClass}</span></div>
-                                <div className="stat-row"><span className="stat-label">HP</span><span className="stat-value">{stats.HitPoints}</span></div>
-                                <div className="stat-row"><span className="stat-label">SPEED</span><span className="stat-value">{stats.Speed}</span></div>
-                            </div>
-                        )
-                    })}
-                    {monster.attributes.map((attributes) => {
-                        return (
-                            <>
-                                <div data-testid="monster-abilities" className="monster-abilities">
-                                    <div className="ability-score"><span className="ability-label">STR</span><span className="ability-value">{attributes.str}</span></div>
-                                    <div className="ability-score"><span className="ability-label">DEX</span><span className="ability-value">{attributes.dex}</span></div>
-                                    <div className="ability-score"><span className="ability-label">CON</span><span className="ability-value">{attributes.con}</span></div>
-                                </div>
-                                <div data-testid="monster-abilities" className="monster-abilities">
-                                    <div className="ability-score"><span className="ability-label">INT</span><span className="ability-value">{attributes.int}</span></div>
-                                    <div className="ability-score"><span className="ability-label">WIS</span><span className="ability-value">{attributes.wis}</span></div>
-                                    <div className="ability-score"><span className="ability-label">CHA</span><span className="ability-value">{attributes.cha}</span></div>
-                                </div>
-                            </>
-                        )
-                    })}
+                    <div data-testid="monster-stats" className="monster-stats">
+                        <div className="stat-row">
+                            <span className="stat-label">AC</span>
+                            <span className="stat-value">{monster.stats.armorClass}</span>
+                        </div>
+                        <div className="stat-row">
+                            <span className="stat-label">HP</span>
+                            <span className="stat-value">{monster.stats.hitPoints}</span>
+                        </div>
+                        <div className="stat-row">
+                            <span className="stat-label">SPEED</span>
+                            <span className="stat-value">{monster.stats.speed}</span>
+                        </div>
+                    </div>
+                    <div data-testid="monster-attributes" className="monster-attributes">
+                        <div className="ability-score">
+                            <span className="ability-label">STR</span>
+                            <span className="ability-value">{monster.attributes.strenth}</span>
+                        </div>
+                        <div className="ability-score">
+                            <span className="ability-label">DEX</span>
+                            <span className="ability-value">{monster.attributes.dexterity}</span>
+                        </div>
+                        <div className="ability-score">
+                            <span className="ability-label">CON</span>
+                            <span className="ability-value">{monster.attributes.constitution}</span>
+                        </div>
+                    </div>
+                    <div data-testid="monster-attributes" className="monster-attributes">
+                        <div className="ability-score">
+                            <span className="ability-label">INT</span>
+                            <span className="ability-value">{monster.attributes.intelligence}</span>
+                        </div>
+                        <div className="ability-score">
+                            <span className="ability-label">WIS</span>
+                            <span className="ability-value">{monster.attributes.wisdom}</span>
+                        </div>
+                        <div className="ability-score">
+                            <span className="ability-label">CHA</span>
+                            <span className="ability-value">{monster.attributes.charisma}</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

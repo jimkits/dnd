@@ -4,6 +4,9 @@
 dnd-api/bin/
 dnd-api/obj/
 
+# SQLite database
+dnd-api/dnd.db
+
 # dependencies
 */node_modules
 */.pnp

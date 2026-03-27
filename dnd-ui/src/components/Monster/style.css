@@ -80,7 +80,7 @@
     font-size: 0.85em;
 }
 
-.monster-abilities {
+.monster-attributes {
     display: flex;
     flex-direction: column;
     gap: 4px;
