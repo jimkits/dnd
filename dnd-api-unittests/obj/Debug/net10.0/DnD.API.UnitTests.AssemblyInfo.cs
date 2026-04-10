@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DnD.API.UnitTests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5a65a56bab2187ab1cb98d4a6507682fe46346ec")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+49260c7409e35750f6aced6f353af296f71e61a4")]
 [assembly: System.Reflection.AssemblyProductAttribute("DnD.API.UnitTests")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DnD.API.UnitTests")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

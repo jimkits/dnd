@@ -1,39 +1,29 @@
-## Overview
+# D&D UI Tests
 
-This project contains end-to-end tests for the Dungeons & Dragons UI, including:
-- Authentication: login, logout, and redirect behaviour
-- Hero navigation: Fighter, Sorcerer, Cleric, Rogue
-- Monster navigation: Small, Medium, Large
+End-to-end tests for the D&D UI, covering authentication, hero navigation, and monster navigation.
 
-## Prerequisites
+## Tech Stack
 
-- [Node.js](https://nodejs.org/) (v18 or higher recommended)
-- npm (comes with Node.js)
-- The DnD UI running on `http://localhost:3000`
-- The DnD API running on `http://localhost:5071`
+- Playwright 1.57 with TypeScript
+- Page Object Model pattern
+- Chromium only
 
-## Setup Instructions
+## Installation
 
-### 1. Clone the Repository
+### Prerequisites
 
-```bash
-git clone <repository-url>
-cd dnd-ui-tests
-```
+- Node.js v18 or higher
+- D&D UI running at `http://localhost:3000`
+- D&D API running at `http://localhost:5071`
 
-### 2. Install Dependencies
+Install dependencies and browsers:
 
 ```bash
 npm install
-```
-
-### 3. Install Playwright Browsers
-
-```bash
 npx playwright install chromium
 ```
 
-### 4. Configure Credentials
+### Configure Credentials
 
 Create a `.env` file in the project root:
 
@@ -41,7 +31,7 @@ Create a `.env` file in the project root:
 cp .env.example .env
 ```
 
-Edit the `.env` file with the DnD credentials:
+Edit the `.env` file to some default values:
 
 ```env
 BASE_URL=http://localhost:3000
@@ -49,38 +39,23 @@ DND_USERNAME=admin
 DND_PASSWORD=admin
 ```
 
-**Important:** Never commit the `.env` file to version control. It's already included in `.gitignore`.
+> Never commit the `.env` file to version control — it is already in `.gitignore`.
 
-## Running Tests
+## Usage
 
-### Run All Tests (Headless)
+### Run All Tests
 
 ```bash
 npx playwright test
 ```
 
-### Run Tests in Headed Mode
+### Other Run Modes
 
 ```bash
-npx playwright test --headed
-```
-
-### Run Tests in Debug Mode
-
-```bash
-npx playwright test --debug
-```
-
-### Run Tests with UI Mode
-
-```bash
-npx playwright test --ui
-```
-
-### Run a Single Project
-
-```bash
-npx playwright test --project=chromium
+npx playwright test --headed       # headed mode
+npx playwright test --debug        # debug mode
+npx playwright test --ui           # UI mode
+npx playwright test --project=chromium  # single project
 ```
 
 ### View Test Report
@@ -89,86 +64,51 @@ npx playwright test --project=chromium
 npx playwright show-report
 ```
 
-## Configuration
+### Run by Tag
 
-### Playwright Configuration (`playwright.config.ts`)
-
-Key settings:
-- **Timeout:** 30 seconds per test
-- **Browser:** Chromium only
-- **Parallel execution:** Enabled for faster test runs
-- **Retries:** 2 retries on CI, 0 locally
-- **Reporters:** HTML, List, and JSON
-
-### Projects
-
-Two projects are defined:
-
-| Project | Purpose |
-|---------|---------|
-| `setup` | Runs `auth.setup.ts` first — logs in and verifies the logout button is visible |
-| `chromium` | Runs all tests after `setup` completes |
-
-The `chromium` project declares `dependencies: ['setup']`, so Playwright always validates the login flow before running the main test suite.
-
-## Authentication Strategy
-
-### Why `addInitScript` is used instead of `storageState`
-
-The DnD app stores its authenticated state in the browser's `sessionStorage`:
-
-```ts
-sessionStorage.setItem('loggedIn', 'true');
-```
-
-Playwright's built-in `storageState` mechanism only captures **cookies** and **localStorage** — it does not capture `sessionStorage`. As a result, saving and restoring the auth state via `storageState` alone has no effect for this app.
-
-To work around this, the hero and monster tests inject the session value directly before the page loads using `page.addInitScript`:
-
-```ts
-await page.addInitScript(() => {
-    sessionStorage.setItem('loggedIn', 'true');
-});
-await page.goto(baseUrl);
-```
-
-`addInitScript` runs before any page script executes, so React reads `loggedIn: "true"` from `sessionStorage` on mount and renders the authenticated layout without going through the login form.
-
-### Login tests
-
-Login tests need to start from an unauthenticated state. They override the project-level `storageState` to an empty value and do not call `addInitScript`, ensuring the app redirects to `/login` as expected:
-
-```ts
-test.use({ storageState: { cookies: [], origins: [] } });
-```
-
-## Test Tagging
-
-Tests are tagged for selective execution:
-
-### Run Smoke Tests Only
 ```bash
-npx playwright test --grep=smoke
+npx playwright test --grep=smoke       # critical path only
+npx playwright test --grep=regression  # full regression suite
 ```
 
-### Run Regression Tests Only
-```bash
-npx playwright test --grep=regression
+## Examples
+
+### Project Structure
+
+```
+e2e/
+page-objects/
 ```
 
-### Available Tags
-- `@smoke` - Critical path tests
-- `@regression` - Full regression suite
+### Playwright Projects
 
-## Troubleshooting
+| Project    | Purpose                                                             |
+| ---------- | ------------------------------------------------------------------- |
+| `setup`    | Runs `auth.setup.ts` first — logs in and verifies logout is visible |
+| `chromium` | Runs all tests after `setup` completes                              |
 
-### "Environment variables must be set"
-- Ensure you've created a `.env` file based on `.env.example`
-- Check that `DND_USERNAME` and `DND_PASSWORD` are set
+The `chromium` project declares `dependencies: ['setup']`, so Playwright always validates the login flow before running the main suite.
 
-### "Browser not found"
-- Run `npx playwright install chromium`
+### Authentication Strategy
 
-### Hero/monster tests fail immediately after the setup test
-- The DnD UI or API may not be running — start both services before running tests
-- Verify `BASE_URL` in `.env` matches where the UI is actually served
+The app stores its auth state in `sessionStorage`:
+
+Playwright's `storageState` only captures cookies and localStorage — not `sessionStorage`.
+Hero and monster tests inject the session value before the page loads using `addInitScript`.
+Login tests override this to start from an unauthenticated state.
+
+### Troubleshooting
+
+| Error                               | Fix                                                                     |
+| ----------------------------------- | ----------------------------------------------------------------------- |
+| "Environment variables must be set" | Create `.env` from `.env.example` and set `DND_USERNAME`/`DND_PASSWORD` |
+| "Browser not found"                 | Run `npx playwright install chromium`                                   |
+| Hero/monster tests fail after setup | Ensure both the UI and API are running before starting tests            |
+
+## License
+
+This project is for personal/educational use. No license has been applied.
+
+## Contributors
+
+- Dimitrios B
