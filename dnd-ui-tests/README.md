@@ -91,11 +91,10 @@ The `chromium` project declares `dependencies: ['setup']`, so Playwright always 
 
 ### Authentication Strategy
 
-The app stores its auth state in `sessionStorage`:
-
-Playwright's `storageState` only captures cookies and localStorage — not `sessionStorage`.
-Hero and monster tests inject the session value before the page loads using `addInitScript`.
-Login tests override this to start from an unauthenticated state.
+The app stores its JWT token in `localStorage`. Playwright's `storageState` captures
+`localStorage`, so `auth.setup.ts` logs in once and saves the browser state to
+`.auth/user.json`. The `chromium` project loads this saved state before each test,
+skipping the login UI entirely.
 
 ### Troubleshooting
 

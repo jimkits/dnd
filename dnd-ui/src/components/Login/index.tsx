@@ -16,8 +16,7 @@ function Login({ setLoggedIn }: { setLoggedIn: (value: boolean) => void }) {
         const result = await validateLogin(username, password);
 
         if (result.success) {
-            sessionStorage.setItem("loggedIn", "true");
-            sessionStorage.setItem("token", result.token!);
+            localStorage.setItem("token", result.token!);
             setLoggedIn(true);
             navigate("/");
         } else {

@@ -7,9 +7,10 @@ import Home from './components/Home';
 import Hero from './components/Hero';
 import Monster from './components/Monster';
 import Login from './components/Login';
+import Navigation from './components/Navigation'
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState(sessionStorage.getItem("loggedIn") === "true");
+  const [loggedIn, setLoggedIn] = useState(!!localStorage.getItem("token"));
 
   return (
     <BrowserRouter>
@@ -30,6 +31,9 @@ function App() {
                 <div className="flex-centre-top">
                   <Header />
                 </div>
+                {/* <div className="flex-navigation">
+                  <Navigation />
+                </div> */}
                 <div className="flex-centre-bottom">
                   <Routes>
                     <Route path='/' element={<Home />} />

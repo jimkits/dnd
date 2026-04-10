@@ -4,9 +4,9 @@ test.describe('Monster Tests', () => {
     const baseUrl: string = process.env.BASE_URL!;
 
     test.beforeEach(async ({ page }) => {
-        await page.addInitScript(() => {
-            sessionStorage.setItem('loggedIn', 'true');
-        });
+        // await page.addInitScript(() => {
+        //     localStorage.setItem('loggedIn', 'true');
+        // });
         await page.goto(baseUrl);
     });
 

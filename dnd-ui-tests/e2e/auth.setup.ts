@@ -1,8 +1,9 @@
 import { test as setup, expect } from '@playwright/test';
 import { LoginPage } from '../page-objects/login-page';
 import { NavigationPage } from '../page-objects/navigation-page';
+import path from 'path';
 
-const authFile = '.auth/user.json';
+const authFile = path.join(__dirname, '../.auth/user.json');
 
 setup('authenticate', async ({ page }) => {
     const baseUrl = process.env.BASE_URL!;
