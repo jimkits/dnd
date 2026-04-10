@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.Testing;
 
 namespace DnD.API.IntegrationTests.Tests;
 
+[Collection("Authorized Tests")]
 public class MonsterControllerTests : BaseTestClass
 {
     public MonsterControllerTests(WebApplicationFactory<Program> factory) : base(factory)
@@ -16,7 +17,7 @@ public class MonsterControllerTests : BaseTestClass
     public async Task GetMonsters_ValidMonster_ReturnsCorrectData()
     {
         // Act
-        var response = await client.GetAsync("/api/monsters?size=small");
+        var response = await _clientWithToken.GetAsync("/api/monsters?size=small");
 
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.OK);
@@ -39,7 +40,7 @@ public class MonsterControllerTests : BaseTestClass
     public async Task GetMonsters_Null_ReturnsNotFound()
     {
         // Act
-        var response = await client.GetAsync("/api/monsters");
+        var response = await _clientWithToken.GetAsync("/api/monsters");
 
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.NotFound);
@@ -53,7 +54,7 @@ public class MonsterControllerTests : BaseTestClass
     public async Task GetMonsters_SizeThatDoesNotExist_ReturnsNotFound()
     {
         // Act
-        var response = await client.GetAsync("/api/monsters?size=void");
+        var response = await _clientWithToken.GetAsync("/api/monsters?size=void");
 
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.BadRequest);

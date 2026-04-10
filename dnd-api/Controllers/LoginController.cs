@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using DnD.API.Data;
+using DnD.API.Services;
 
 namespace DnD.API.Controllers;
 
@@ -7,21 +8,33 @@ namespace DnD.API.Controllers;
 [Route("/api/login")]
 public class LoginController : ControllerBase
 {
-    private readonly UserStore userStore;
+    private readonly IConfiguration _config;
+    private readonly UserStore _userStore;
 
-    public LoginController(UserStore userStore)
+    public LoginController(IConfiguration config, UserStore userStore)
     {
-        this.userStore = userStore;
+        _config = config;
+        _userStore = userStore;
     }
 
     [HttpPost]
     public IActionResult Login([FromBody] LoginRequest request)
     {
-        if (userStore.IsValidUser(request.Username, request.Password))
+        if (!_userStore.IsValidUser(request.Username, request.Password))
         {
-            return Ok(new { message = "Login successful" });
+            return Unauthorized(new { message = "Invalid username or password" });
         }
 
-        return Unauthorized(new { message = "Invalid username or password" });
+        var tokenService = new TokenService(_config);
+
+        var token = tokenService.GenerateToken(request.Username);
+
+        var result = new LoginResponse
+        {
+            Message = "Login successful",
+            Token = token
+        };
+
+        return Ok(result);
     }
 }

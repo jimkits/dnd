@@ -26,8 +26,8 @@
           "net10.0": {
             "targetAlias": "net10.0",
             "projectReferences": {
-              "C:\\git\\dnd\\dnd-api\\dnd.API.csproj": {
-                "projectPath": "C:\\git\\dnd\\dnd-api\\dnd.API.csproj"
+              "C:\\git\\dnd\\dnd-api\\DnD.API.csproj": {
+                "projectPath": "C:\\git\\dnd\\dnd-api\\DnD.API.csproj"
               }
             }
           }
@@ -367,12 +367,12 @@
         }
       }
     },
-    "C:\\git\\dnd\\dnd-api\\dnd.API.csproj": {
+    "C:\\git\\dnd\\dnd-api\\DnD.API.csproj": {
       "version": "1.0.1",
       "restore": {
-        "projectUniqueName": "C:\\git\\dnd\\dnd-api\\dnd.API.csproj",
-        "projectName": "dnd.API",
-        "projectPath": "C:\\git\\dnd\\dnd-api\\dnd.API.csproj",
+        "projectUniqueName": "C:\\git\\dnd\\dnd-api\\DnD.API.csproj",
+        "projectName": "DnD.API",
+        "projectPath": "C:\\git\\dnd\\dnd-api\\DnD.API.csproj",
         "packagesPath": "C:\\Users\\Dim\\.nuget\\packages\\",
         "outputPath": "C:\\git\\dnd\\dnd-api\\obj\\",
         "projectStyle": "PackageReference",
@@ -407,6 +407,10 @@
         "net10.0": {
           "targetAlias": "net10.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[10.0.5, )"
+            },
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
               "version": "[10.0.2, )"
@@ -421,13 +425,13 @@
               "target": "Package",
               "version": "[10.0.5, )"
             },
-            "Swashbuckle.AspNetCore.SwaggerGen": {
+            "Microsoft.OpenApi": {
               "target": "Package",
-              "version": "[10.1.0, )"
+              "version": "[2.4.1, )"
             },
-            "Swashbuckle.AspNetCore.SwaggerUI": {
+            "Swashbuckle.AspNetCore": {
               "target": "Package",
-              "version": "[10.1.0, )"
+              "version": "[10.1.7, )"
             }
           },
           "imports": [

@@ -14,6 +14,7 @@ dnd-api/dnd.db
 
 # testing
 */coverage
+*/.auth
 
 # production
 */build

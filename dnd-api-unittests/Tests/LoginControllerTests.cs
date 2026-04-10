@@ -2,11 +2,25 @@ using Microsoft.AspNetCore.Mvc;
 using DnD.API.Controllers;
 using DnD.API.Data;
 using DnD.API.UnitTests.Helpers;
+using Microsoft.Extensions.Configuration;
 
 namespace DnD.API.UnitTests.Tests;
 
 public class LoginControllerTests
 {
+    private readonly IConfiguration _config;
+
+    public LoginControllerTests()
+    {
+        _config = new ConfigurationBuilder().AddInMemoryCollection(new Dictionary<string, string?>
+        {
+            {"Jwt:Key", "jhuwiropslajurowpjitrunikwgyahuq"},
+            {"Jwt:Issuer", "testIssuer"},
+            {"Jwt:Audience", "testAudience"}
+        })
+        .Build();
+    }
+
     [Fact]
     public void Login_ValidCredentials_ReturnsOk()
     {
@@ -14,7 +28,7 @@ public class LoginControllerTests
         db.Users.Add(new AppUser { Username = "admin", Password = "admin" });
         db.SaveChanges();
 
-        var controller = new LoginController(new UserStore(db));
+        var controller = new LoginController(_config, new UserStore(db));
         var response = controller.Login(new LoginRequest { Username = "admin", Password = "admin" });
 
         Assert.IsType<OkObjectResult>(response);
@@ -27,7 +41,7 @@ public class LoginControllerTests
         db.Users.Add(new AppUser { Username = "admin", Password = "admin" });
         db.SaveChanges();
 
-        var controller = new LoginController(new UserStore(db));
+        var controller = new LoginController(_config, new UserStore(db));
         var response = controller.Login(new LoginRequest { Username = "admin", Password = "wrong" });
 
         Assert.IsType<UnauthorizedObjectResult>(response);
@@ -40,7 +54,7 @@ public class LoginControllerTests
         db.Users.Add(new AppUser { Username = "admin", Password = "admin" });
         db.SaveChanges();
 
-        var controller = new LoginController(new UserStore(db));
+        var controller = new LoginController(_config, new UserStore(db));
         var response = controller.Login(new LoginRequest { Username = "admin", Password = "wrong" });
 
         Assert.IsType<UnauthorizedObjectResult>(response);
@@ -57,7 +71,7 @@ public class LoginControllerTests
         db.Users.Add(new AppUser { Username = "admin", Password = "admin" });
         db.SaveChanges();
 
-        var controller = new LoginController(new UserStore(db));
+        var controller = new LoginController(_config, new UserStore(db));
         var response = controller.Login(new LoginRequest { Username = username, Password = password });
 
         Assert.IsType<UnauthorizedObjectResult>(response);

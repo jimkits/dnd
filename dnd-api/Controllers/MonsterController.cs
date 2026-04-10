@@ -1,11 +1,13 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 using DnD.API.Data;
 
 namespace DnD.API.Controllers;
 
 [ApiController]
 [Route("/api/monsters")]
+[Authorize]
 public class MonsterController : ControllerBase
 {
     private readonly DndDbContext _db;

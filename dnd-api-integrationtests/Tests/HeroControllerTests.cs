@@ -7,6 +7,7 @@ using DnD.API.Data;
 
 namespace DnD.API.IntegrationTests.Tests;
 
+[Collection("Authorized Tests")]
 public class HeroControllerTests : BaseTestClass
 {
     public HeroControllerTests(WebApplicationFactory<Program> factory) : base(factory) { }
@@ -15,7 +16,7 @@ public class HeroControllerTests : BaseTestClass
     public async Task GetHeroes_ValidHero_ReturnsCorrectHero()
     {
         // Act
-        var response = await client.GetAsync("/api/hero?hero=cleric");
+        var response = await _clientWithToken.GetAsync("/api/hero?hero=cleric");
 
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.OK);
@@ -35,7 +36,7 @@ public class HeroControllerTests : BaseTestClass
     public async Task GetHeroes_Null_ReturnsNotFound()
     {
         // Act
-        var response = await client.GetAsync("/api/hero");
+        var response = await _clientWithToken.GetAsync("/api/hero");
 
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.NotFound);
@@ -49,7 +50,7 @@ public class HeroControllerTests : BaseTestClass
     public async Task GetHeroes_HeroThatDoesNotExist_ReturnsBadRequest()
     {
         // Act
-        var response = await client.GetAsync("/api/hero?hero=void");
+        var response = await _clientWithToken.GetAsync("/api/hero?hero=void");
 
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
@@ -63,7 +64,7 @@ public class HeroControllerTests : BaseTestClass
     public async Task GetHeroImage_ValidHero_ReturnsCorrectHero()
     {
         // Act
-        var response = await client.GetAsync("/api/hero/image?hero=cleric");
+        var response = await _clientWithToken.GetAsync("/api/hero/image?hero=cleric");
 
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.OK);
@@ -77,7 +78,7 @@ public class HeroControllerTests : BaseTestClass
     public async Task GetHeroImage_OutOfEnumBounds_ReturnsNotFound()
     {
         // Act
-        var response = await client.GetAsync("/api/hero/image?hero=void");
+        var response = await _clientWithToken.GetAsync("/api/hero/image?hero=void");
 
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
@@ -91,7 +92,7 @@ public class HeroControllerTests : BaseTestClass
     public async Task GetHeroImage_Null_ReturnsNotFound()
     {
         // Act
-        var response = await client.GetAsync("/api/hero/image");
+        var response = await _clientWithToken.GetAsync("/api/hero/image");
 
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.NotFound);

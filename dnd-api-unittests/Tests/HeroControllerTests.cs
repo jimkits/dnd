@@ -1,14 +1,17 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Hosting;
+using FluentAssertions;
+using Moq;
 using DnD.API.Controllers;
 using DnD.API.UnitTests.Helpers;
 using DnD.API.Data;
-using FluentAssertions;
 
 namespace DnD.API.UnitTests.Tests;
 
 public class HeroControllerTests
 {
     private readonly HeroController _heroController;
+    private readonly Mock<IWebHostEnvironment> _mockEnv;
 
     public HeroControllerTests()
     {
@@ -16,14 +19,17 @@ public class HeroControllerTests
         db.Heroes.Add(new HeroData { Name = Heroes.Cleric.ToString(), Description = "desc" });
         db.SaveChanges();
 
-        _heroController = new HeroController(db);
+        _mockEnv = new Mock<IWebHostEnvironment>();
+        _mockEnv.Setup(ex => ex.ContentRootPath).Returns(AppContext.BaseDirectory);
+
+        _heroController = new HeroController(db, _mockEnv.Object);
     }
 
     [Fact]
     public void GetHeroes_ValidHero_ReturnsCorrectHero()
     {
         var response = (OkObjectResult)_heroController.GetHeroes(Heroes.Cleric);
-        var name = response.Value!.GetType().GetProperty("name")!.GetValue(response.Value);
+        var name = response.Value!.GetType().GetProperty("Name")!.GetValue(response.Value);
 
         name.Should().Be(Heroes.Cleric.ToString());
     }
@@ -58,7 +64,7 @@ public class HeroControllerTests
         var db = DbHelper.CreateInMemoryDb();
         db.SaveChanges();
 
-        var heroController = new HeroController(db);
+        var heroController = new HeroController(db, _mockEnv.Object);
 
         var response = (NotFoundObjectResult)heroController.GetHeroes(Heroes.Cleric);
 

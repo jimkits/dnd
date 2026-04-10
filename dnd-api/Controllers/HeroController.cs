@@ -1,11 +1,12 @@
 using Microsoft.AspNetCore.Mvc;
-using System.Text.Json;
+using Microsoft.AspNetCore.Authorization;
 using DnD.API.Data;
 
 namespace DnD.API.Controllers;
 
 [ApiController]
 [Route("/api/hero")]
+[Authorize]
 public class HeroController : ControllerBase
 {
     private readonly DndDbContext _db;

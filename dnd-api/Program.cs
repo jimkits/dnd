@@ -1,15 +1,36 @@
 using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 using DnD.API.Data;
+using DnD.API.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using Microsoft.OpenApi;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container
 builder.Services.AddControllers()
-    .AddJsonOptions(o => o.JsonSerializerOptions.Converters.Add(new System.Text.Json.Serialization.JsonStringEnumConverter()));
+    .AddJsonOptions(options => options.JsonSerializerOptions.Converters.Add(new System.Text.Json.Serialization.JsonStringEnumConverter()));
 builder.Services.AddOpenApi();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(o => o.UseInlineDefinitionsForEnums());
+
+builder.Services.AddSwaggerGen(options =>
+{
+    options.UseInlineDefinitionsForEnums();
+    options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Name = "Authorization",
+        Type = SecuritySchemeType.Http,
+        Scheme = "Bearer",
+        In = ParameterLocation.Header
+    });
+    options.AddSecurityRequirement(doc =>
+      {
+          var bearerRef = new OpenApiSecuritySchemeReference("Bearer", doc);
+          return new OpenApiSecurityRequirement { { bearerRef, [] } };
+      });
+});
+
 builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(policy =>
@@ -24,6 +45,22 @@ builder.Services.AddDbContext<DndDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("Default")));
 
 builder.Services.AddScoped<UserStore>();
+builder.Services.AddScoped<TokenService>();
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            ValidIssuer = builder.Configuration["Jwt:Issuer"],
+            ValidAudience = builder.Configuration["Jwt:Audience"],
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]!))
+        };
+    });
 
 var app = builder.Build();
 
@@ -33,6 +70,9 @@ using (var scope = app.Services.CreateScope())
     var db = scope.ServiceProvider.GetRequiredService<DndDbContext>();
     await db.Database.MigrateAsync();
 }
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.UseCors();
 app.UseHttpsRedirection();
@@ -47,14 +87,14 @@ app.MapGet("/api/version", () => Assembly.GetExecutingAssembly()
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger(s =>
+    app.UseSwagger(options =>
     {
-        s.RouteTemplate = "api/swagger/{documentname}/swagger.json";
+        options.RouteTemplate = "api/swagger/{documentname}/swagger.json";
     });
-    app.UseSwaggerUI(s =>
+    app.UseSwaggerUI(options =>
     {
-        s.SwaggerEndpoint("/api/swagger/v1/swagger.json", "DnD Swagger");
-        s.RoutePrefix = "api/swagger";
+        options.SwaggerEndpoint("/api/swagger/v1/swagger.json", "DnD Swagger");
+        options.RoutePrefix = "api/swagger";
     });
 }
 

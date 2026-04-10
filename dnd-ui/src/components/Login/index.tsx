@@ -17,6 +17,7 @@ function Login({ setLoggedIn }: { setLoggedIn: (value: boolean) => void }) {
 
         if (result.success) {
             sessionStorage.setItem("loggedIn", "true");
+            sessionStorage.setItem("token", result.token!);
             setLoggedIn(true);
             navigate("/");
         } else {

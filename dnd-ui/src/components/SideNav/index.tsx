@@ -18,6 +18,7 @@ const SideNav = ({ setLoggedIn }: { setLoggedIn: (value: boolean) => void }) => 
 
     const handleLogout = () => {
         sessionStorage.removeItem("loggedIn");
+        sessionStorage.removeItem("token");
         setLoggedIn(false);
         navigate("/login");
     };

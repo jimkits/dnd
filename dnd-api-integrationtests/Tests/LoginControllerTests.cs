@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc.Testing;
 using FluentAssertions;
 using System.Net.Http.Json;
 
-
 namespace DnD.API.IntegrationTests.Tests;
 
 public class LoginControllerTests : BaseTestClass
@@ -12,26 +11,8 @@ public class LoginControllerTests : BaseTestClass
     {
     }
 
-    [Fact]
-    public async Task Login_ValidCredentials_ReturnsOk()
-    {
-        // Setup
-        var loginRequest = new LoginRequest
-        {
-            Username = "admin",
-            Password = "admin"
-        };
+    // Positive test is used to get a token in BaseTestClass: InitializeAsync()
 
-        // Act
-        var response = await client.PostAsJsonAsync("/api/login", loginRequest);
-
-        // Assert
-        response.StatusCode.Should().Be(HttpStatusCode.OK);
-
-        var content = await response.Content.ReadAsStringAsync();
-
-        content.Should().ContainEquivalentOf("Login successful");
-    }
 
     [Theory]
     [InlineData("admin", "wrong")]
@@ -46,7 +27,7 @@ public class LoginControllerTests : BaseTestClass
         };
 
         // Act
-        var response = await client.PostAsJsonAsync("/api/login", loginRequest);
+        var response = await _clientWithoutToken.PostAsJsonAsync("/api/login", loginRequest);
 
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.Unauthorized);
@@ -71,7 +52,7 @@ public class LoginControllerTests : BaseTestClass
         };
 
         // Act
-        var response = await client.PostAsJsonAsync("/api/login", loginRequest);
+        var response = await _clientWithoutToken.PostAsJsonAsync("/api/login", loginRequest);
 
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.Unauthorized);

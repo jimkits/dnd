@@ -455,3 +455,11 @@ C:\git\dnd\dnd-api-integrationtests\obj\Debug\net10.0\DnD.API.IntegrationTests.p
 C:\git\dnd\dnd-api-integrationtests\obj\Debug\net10.0\DnD.API.IntegrationTests.genruntimeconfig.cache
 C:\git\dnd\dnd-api-integrationtests\obj\Debug\net10.0\ref\DnD.API.IntegrationTests.dll
 C:\git\dnd\dnd-api-integrationtests\bin\Debug\net10.0\testsettings.json
+C:\git\dnd\dnd-api-integrationtests\bin\Debug\net10.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\git\dnd\dnd-api-integrationtests\bin\Debug\net10.0\Microsoft.IdentityModel.Abstractions.dll
+C:\git\dnd\dnd-api-integrationtests\bin\Debug\net10.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\git\dnd\dnd-api-integrationtests\bin\Debug\net10.0\Microsoft.IdentityModel.Logging.dll
+C:\git\dnd\dnd-api-integrationtests\bin\Debug\net10.0\Microsoft.IdentityModel.Protocols.dll
+C:\git\dnd\dnd-api-integrationtests\bin\Debug\net10.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\git\dnd\dnd-api-integrationtests\bin\Debug\net10.0\Microsoft.IdentityModel.Tokens.dll
+C:\git\dnd\dnd-api-integrationtests\bin\Debug\net10.0\System.IdentityModel.Tokens.Jwt.dll
