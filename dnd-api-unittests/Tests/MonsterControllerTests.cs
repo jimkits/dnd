@@ -29,6 +29,46 @@ public class MonsterControllerTests
     }
 
     [Fact]
+    public void GetAllMonsters_ReturnsCorrectData()
+    {
+        var response = (OkObjectResult)_monsterController.GetAllMonsters();
+
+        var responseJson = JsonSerializer.Serialize(response.Value);
+        var monsters = JsonSerializer.Deserialize<List<MonsterData>>(responseJson,
+            new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+        using (new AssertionScope())
+        {
+            monsters.Should().HaveCount(6);
+            monsters.Select(x => x.Name).ToList().Should().NotBeNullOrEmpty();
+            monsters.Select(x => x.Stats.ArmorClass).ToList().Should().NotBeNullOrEmpty();
+            monsters.Select(x => x.Attributes.Charisma).ToList().Should().NotBeNullOrEmpty();
+        }
+    }
+
+    [Theory]
+    [InlineData(MonsterSize.Small, 2, new string[] { "Goblin", "Baboon" })]
+    [InlineData(MonsterSize.Medium, 2, new string[] { "Bandit", "Banshee" })]
+    [InlineData(MonsterSize.Large, 2, new string[] { "Chimera", "Clay Golem" })]
+    public void GetMonsters_ValidSize_ReturnsCorrectData(MonsterSize size, int expectedCount, string[] monsterNames)
+    {
+        var response = (OkObjectResult)_monsterController.GetMonsters(size);
+
+        var responseJson = JsonSerializer.Serialize(response.Value);
+        var monsters = JsonSerializer.Deserialize<List<MonsterData>>(responseJson,
+            new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+        using (new AssertionScope())
+        {
+            monsters.Should().HaveCount(expectedCount);
+            monsters.Should().OnlyContain(x => x.Size == size.ToString());
+            monsters.Select(x => x.Name).ToList().Should().Contain(monsterNames.ToList());
+            monsters.Select(x => x.Stats.ArmorClass).ToList().Should().NotBeNullOrEmpty();
+            monsters.Select(x => x.Attributes.Charisma).ToList().Should().NotBeNullOrEmpty();
+        }
+    }
+
+    [Fact]
     public void GetMonsters_Null_ReturnsNotFound()
     {
         var response = (NotFoundObjectResult)_monsterController.GetMonsters(null);
@@ -54,27 +94,5 @@ public class MonsterControllerTests
         var response = (NotFoundObjectResult)controller.GetMonsters(MonsterSize.Small);
 
         response.Value!.ToString().Should().Be("The monsters of size Small were not found");
-    }
-
-    [Theory]
-    [InlineData(MonsterSize.Small, 2, new string[] { "Goblin", "Baboon" })]
-    [InlineData(MonsterSize.Medium, 2, new string[] { "Bandit", "Banshee" })]
-    [InlineData(MonsterSize.Large, 2, new string[] { "Chimera", "Clay Golem" })]
-    public void GetMonsters_ValidSize_ReturnsCorrectData(MonsterSize size, int expectedCount, string[] monsterNames)
-    {
-        var response = (OkObjectResult)_monsterController.GetMonsters(size);
-
-        var responseJson = JsonSerializer.Serialize(response.Value);
-        var monsters = JsonSerializer.Deserialize<List<MonsterData>>(responseJson,
-            new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-
-        using (new AssertionScope())
-        {
-            monsters.Should().HaveCount(expectedCount);
-            monsters.Should().OnlyContain(x => x.Size == size.ToString());
-            monsters.Select(x => x.Name).ToList().Should().Contain(monsterNames.ToList());
-            monsters.Select(x => x.Stats.ArmorClass).ToList().Should().NotBeNullOrEmpty();
-            monsters.Select(x => x.Attributes.Charisma).ToList().Should().NotBeNullOrEmpty();
-        }
     }
 }

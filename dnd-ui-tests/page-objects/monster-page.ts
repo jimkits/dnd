@@ -3,14 +3,14 @@ import { BasePage } from "./base-page";
 
 export class MonsterPage extends BasePage {
     page: Page;
-    monsterTitle: Locator;
-    monsterList: Locator;
+    monsterName: Locator;
+    monsterDescription: Locator;
 
     constructor(page: Page) {
         super(page);
         this.page = page;
 
-        this.monsterTitle = this.page.locator('.monster-list h1');
-        this.monsterList = this.page.locator('.monster-list');
+        this.monsterName = this.page.locator('h1.monster-name');
+        this.monsterDescription = this.page.locator('p.monster-description');
     }
 }

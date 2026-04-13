@@ -19,18 +19,6 @@ test.describe('Login Tests', () => {
         page.close();
     });
 
-    test('User is redirected to the login page when not authenticated',
-        { tag: ['@smoke', '@regression'] },
-        async ({ page }) => {
-        // Act
-        await page.goto(baseUrl);
-
-        // Assert
-        await test.step('verify the user is on the login page', async () => {
-            await expect(page).toHaveURL('/login');
-        });
-    });
-
     test('User successfully logs in',
         { tag: ['@smoke', '@regression'] },
         async ({ page, loginPage, mainPage, navigationPage }) => {
@@ -42,7 +30,20 @@ test.describe('Login Tests', () => {
         // Assert
         await test.step('verify the user is on the home page', async () => {
             await expect(mainPage.pageTitle).toBeVisible();
+            await expect(mainPage.welcomeText).toBeVisible();
             await expect(navigationPage.logoutButton).toBeVisible();
+        });
+    });
+
+    test('User is redirected to the login page when not authenticated',
+        { tag: ['@smoke', '@regression'] },
+        async ({ page }) => {
+        // Act
+        await page.goto(baseUrl);
+
+        // Assert
+        await test.step('verify the user is on the login page', async () => {
+            await expect(page).toHaveURL('/login');
         });
     });
 

@@ -71,10 +71,9 @@ using (var scope = app.Services.CreateScope())
     await db.Database.MigrateAsync();
 }
 
+app.UseCors();
 app.UseAuthentication();
 app.UseAuthorization();
-
-app.UseCors();
 app.UseHttpsRedirection();
 app.MapControllers();
 

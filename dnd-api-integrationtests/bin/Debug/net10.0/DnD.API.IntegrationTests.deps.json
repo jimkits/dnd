@@ -38,11 +38,11 @@
     ".NETCoreApp,Version=v10.0": {
       "DnD.API.IntegrationTests/1.0.0": {
         "dependencies": {
+          "DnD.API": "1.0.1",
           "FluentAssertions": "8.9.0",
           "Microsoft.AspNetCore.Mvc.Testing": "10.0.2",
           "Microsoft.NET.Test.Sdk": "17.14.1",
           "coverlet.collector": "6.0.4",
-          "dnd.API": "1.0.1",
           "xunit": "2.9.3",
           "xunit.runner.visualstudio": "3.1.4",
           "Microsoft.AspNetCore.Antiforgery": "10.0.0.0",
@@ -1308,7 +1308,7 @@
           "lib/netstandard1.1/xunit.execution.dotnet.dll": {}
         }
       },
-      "dnd.API/1.0.1": {
+      "DnD.API/1.0.1": {
         "dependencies": {
           "Microsoft.AspNetCore.Authentication.JwtBearer": "10.0.5",
           "Microsoft.AspNetCore.OpenApi": "10.0.2",
@@ -1317,13 +1317,13 @@
           "Swashbuckle.AspNetCore": "10.1.7"
         },
         "runtime": {
-          "dnd.API.dll": {
+          "DnD.API.dll": {
             "assemblyVersion": "1.0.1.0",
             "fileVersion": "1.0.1.0"
           }
         },
         "compile": {
-          "dnd.API.dll": {}
+          "DnD.API.dll": {}
         }
       },
       "Microsoft.AspNetCore.Antiforgery/10.0.0.0": {
@@ -3662,7 +3662,7 @@
       "path": "xunit.extensibility.execution/2.9.3",
       "hashPath": "xunit.extensibility.execution.2.9.3.nupkg.sha512"
     },
-    "dnd.API/1.0.1": {
+    "DnD.API/1.0.1": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

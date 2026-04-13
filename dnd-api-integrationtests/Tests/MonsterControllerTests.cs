@@ -14,6 +14,29 @@ public class MonsterControllerTests : BaseTestClass
     }
 
     [Fact]
+    public async Task GetAllMonsters_ReturnsCorrectData()
+    {
+        // Act
+        var response = await _clientWithToken.GetAsync("/api/monsters/all");
+
+        // Assert
+        response.StatusCode.Should().Be(HttpStatusCode.OK);
+
+        var contentString = await response.Content.ReadAsStringAsync();
+
+        var content = JsonSerializer.Deserialize<List<MonsterData>>(contentString, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+        content.Should().HaveCountGreaterThan(0);
+
+        using (new AssertionScope())
+        {
+            content.First().Name.Should().NotBeNullOrEmpty();
+            content.First().Stats.HitPoints.Should().NotBeNullOrEmpty();
+            content.First().Attributes.Strenth.Should().NotBeNullOrEmpty();
+        }
+    }
+
+    [Fact]
     public async Task GetMonsters_ValidMonster_ReturnsCorrectData()
     {
         // Act

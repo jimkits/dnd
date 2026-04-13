@@ -1,43 +1,24 @@
-.monster-list h1{
-    text-align: left;
-}
-
-.monster-list h2{
-    text-align: left;
-    line-height: 30px;
-    margin: 0;
-    padding: 6px 0;
-    cursor: pointer;
-}
-
-.monster-list h2:hover {
-    color: #C08423;
-}
-
-.monster-list h3{
-    text-align: left;
-    line-height: 1.5;
-    margin: 2px 0;
-}
-
-.monster-display{
-    border-left: 2px solid #C08423;
-    padding: 8px 14px;
-    margin-bottom: 10px;
-}
-
-.monster-hidden{
-    padding: 8px 14px;
-    margin-bottom: 10px;
-}
-
-.monster-details-display{
+.monster-list{
     display: flex;
-    flex-flow: column;
-    padding-top: 6px;
+    flex-direction: column;
+    align-items: center;
+}
+
+.monster-name{
+    text-align: left;
+    width: 80vmin;
+}
+
+.monster-information{
+    width: 80vmin;
+    align-self: center;
+    display: flex;
+    flex-direction: column;
 }
 
 .monster-description{
+    text-align: left;
+    /* flex: 1; */
     font-style: italic;
     opacity: 0.85;
 }
@@ -46,7 +27,6 @@
     display: flex;
     flex-flow: row;
     gap: 32px;
-    border-top: 1px solid #C08423;
     margin-top: 8px;
     padding-top: 8px;
 }
@@ -78,6 +58,7 @@
 
 .stat-value {
     font-size: 0.85em;
+    color: #f0e6d0;
 }
 
 .monster-attributes {
@@ -106,28 +87,5 @@
 
 .ability-value {
     font-size: 0.85em;
-}
-
-.monster-details-hidden{
-  height: 0px;
-  width: 0px;
-  overflow-x: hidden;
-}
-
-.arrow {
-  border: solid #C58250;
-  border-width: 0 3px 3px 0;
-  display: inline-block;
-  padding: 3px;
-  margin-left: 8px;
-}
-
-.right {
-  transform: rotate(-45deg);
-  -webkit-transform: rotate(-45deg);
-}
-
-.down {
-  transform: rotate(45deg);
-  -webkit-transform: rotate(45deg);
+    color: #f0e6d0;
 }

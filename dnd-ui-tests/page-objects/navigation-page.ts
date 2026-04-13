@@ -1,48 +1,42 @@
-import { test, Locator, Page, expect } from "@playwright/test";
+import { test, Locator, Page } from "@playwright/test";
 import { BasePage } from "./base-page";
 
 export class NavigationPage extends BasePage {
     page: Page;
-    sideNavButton: Locator;
+    homeButton: Locator;
+    heroesButton: Locator;
+    monstersButton: Locator;
     logoutButton: Locator;
-    sideNavOpen: Locator;
 
     constructor(page: Page) {
         super(page);
         this.page = page;
 
-        this.sideNavButton = this.page.locator('button.btn-nav');
-        this.logoutButton = this.page.locator('button.btn-logout');
-        this.sideNavOpen = this.page.locator('.nav-sidebar-open');
+        this.homeButton = this.page.locator('a.btn-home');
+        this.heroesButton = this.page.locator('a.btn-heroes');
+        this.monstersButton = this.page.locator('a.btn-monsters');
+        this.logoutButton = this.page.locator('a.btn-logout');
     }
 
-    async openSideNav(): Promise<this> {
-        await test.step('open the side navigation', async () => {
-            await expect(this.sideNavButton).toBeEnabled();
-            await this.sideNavButton.click();
-            await expect(this.sideNavOpen).toBeVisible();
+    async navigateToHome(): Promise<this> {
+        await test.step('navigate to home page', async () => {
+            await this.homeButton.click();
         });
 
         return this;
     }
 
-    async navigateToHero(heroName: string): Promise<this> {
-        await this.openSideNav();
-
-        await test.step(`navigate to ${heroName} hero`, async () => {
-            const heroLink = this.sideNavOpen.locator('.nav-link', { hasText: heroName });
-            await heroLink.click();
+    async navigateToHeroes(): Promise<this> {
+        await test.step('navigate to the heroes page', async () => {
+            await this.heroesButton.click();
         });
 
         return this;
     }
 
-    async navigateToMonster(size: string): Promise<this> {
-        await this.openSideNav();
-
-        await test.step(`navigate to ${size} monsters`, async () => {
-            const monsterLink = this.sideNavOpen.locator('.nav-link', { hasText: size });
-            await monsterLink.click();
+    async navigateToMonsters(): Promise<this> {
+        await test.step('navigate to the monsters page', async () => {
+            await this.monstersButton.click();
         });
 
         return this;

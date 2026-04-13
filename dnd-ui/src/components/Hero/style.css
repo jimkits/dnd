@@ -1,34 +1,27 @@
-.hero{
+.heroes{
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
-.hero h1{
+.hero-name{
     text-align: left;
+    width: 120vmin;
 }
 
-.hero h2{
-    text-align: left;
-    line-height: 30px;
-}
-
-.txt-hero{
-    align-self: center;
-}
-
-.hero-details{
-    width: 100vmin;
+.hero-information{
+    width: 120vmin;
     align-self: center;
     display: flex;
     flex-direction: row;
 }
 
-.img-hero{
-    height: 600px;
-    width: 400px;
-    align-self: flex-start;
+.hero-description{
+    text-align: justify;
+    flex: 1;
 }
 
-.txt-hero-description{
-    align-self: flex-start;
+.hero-image{
+    height: 600px;
+    width: 400px;
 }

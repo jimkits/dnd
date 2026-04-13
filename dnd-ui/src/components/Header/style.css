@@ -28,6 +28,17 @@
   align-self: auto;
 }
 
+.btn-dragon-eye{
+  background-color: #1a1209;
+  outline: 0;
+  border: none;
+}
+
+.img-dragon-eye{
+  width: 150px;
+  height: 150px;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .img-header-logo {
     animation: App-logo-spin infinite 20s linear;

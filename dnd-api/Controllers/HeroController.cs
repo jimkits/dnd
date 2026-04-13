@@ -18,62 +18,44 @@ public class HeroController : ControllerBase
         _env = env;
     }
 
-    [HttpGet]
-    public IActionResult GetHeroes([FromQuery] Heroes? hero)
+    [HttpGet("all")]
+    public IActionResult GetHeroes()
     {
-        if (hero == null)
-        {
-            return NotFound($"No hero was requested");
-        }
+        var heroData = _db.Heroes.ToList();
 
-        var heroData = _db.Heroes.FirstOrDefault(h => h.Name == hero.ToString());
+        if (!heroData.Any())
+            return NotFound("No heroes were found");
 
-        if (heroData == null)
-        {
-            return NotFound($"The hero {hero} is not found");
-        }
-
-        var result = new HeroData
-        {
-            Name = heroData.Name,
-            Description = heroData.Description
-        };
+        var result = heroData.Select(h => ToResponse(h)).ToList();
 
         return Ok(result);
     }
 
-    [HttpGet("image")]
-    public IActionResult GetHeroImage([FromQuery] Heroes? hero)
+    [HttpGet]
+    public IActionResult GetHero([FromQuery] Heroes? hero)
     {
-        if (string.IsNullOrEmpty(hero.ToString()))
+        if (hero == null)
+            return NotFound("No hero was requested");
+
+        var heroData = _db.Heroes.FirstOrDefault(h => h.Name == hero.ToString());
+
+        if (heroData == null)
+            return NotFound($"The hero {hero} is not found");
+
+        return Ok(ToResponse(heroData));
+    }
+
+    private HeroData ToResponse(HeroData h)
+    {
+        var image = string.Empty;
+        if (!string.IsNullOrEmpty(h.Image))
         {
-            return NotFound($"No hero was requested");
+            var fileLocation = Path.Combine(_env.ContentRootPath, "Data/Images/");
+            var fullPath = Path.Combine(fileLocation, h.Image);
+
+            if (System.IO.File.Exists(fullPath))
+                image = Convert.ToBase64String(System.IO.File.ReadAllBytes(fullPath));
         }
-
-        string filePath;
-
-        switch (hero)
-        {
-            case Heroes.Cleric:
-                filePath = "Data/Images/img-hero-cleric.png";
-                break;
-            case Heroes.Fighter:
-                filePath = "Data/Images/img-hero-fighter.png";
-                break;
-            case Heroes.Rogue:
-                filePath = "Data/Images/img-rogue.png";
-                break;
-            case Heroes.Sorcerer:
-                filePath = "Data/Images/img-sorcerer.png";
-                break;
-            default:
-                return NotFound($"The hero {hero} is not found");
-        }
-
-        // Build an absolute path for the stored images
-        var fullPath = Path.Combine(_env.ContentRootPath, filePath);
-        var imageBytes = System.IO.File.ReadAllBytes(fullPath);
-
-        return File(imageBytes, "image/png");
+        return new HeroData { Id = h.Id, Name = h.Name, Description = h.Description, Image = image };
     }
 }

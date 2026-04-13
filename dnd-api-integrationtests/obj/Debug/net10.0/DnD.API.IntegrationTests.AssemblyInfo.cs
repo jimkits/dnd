@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DnD.API.IntegrationTests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+49260c7409e35750f6aced6f353af296f71e61a4")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2f194dc600d14f17e815a9ad5def6f70ed484d6a")]
 [assembly: System.Reflection.AssemblyProductAttribute("DnD.API.IntegrationTests")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DnD.API.IntegrationTests")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

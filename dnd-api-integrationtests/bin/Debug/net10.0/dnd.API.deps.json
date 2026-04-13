@@ -6,7 +6,7 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v10.0": {
-      "dnd.API/1.0.1": {
+      "DnD.API/1.0.1": {
         "dependencies": {
           "Microsoft.AspNetCore.Authentication.JwtBearer": "10.0.5",
           "Microsoft.AspNetCore.OpenApi": "10.0.2",
@@ -16,7 +16,7 @@
           "Swashbuckle.AspNetCore": "10.1.7"
         },
         "runtime": {
-          "dnd.API.dll": {}
+          "DnD.API.dll": {}
         }
       },
       "Humanizer.Core/2.14.1": {
@@ -788,7 +788,7 @@
     }
   },
   "libraries": {
-    "dnd.API/1.0.1": {
+    "DnD.API/1.0.1": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

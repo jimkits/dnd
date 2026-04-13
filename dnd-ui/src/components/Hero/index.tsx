@@ -1,39 +1,25 @@
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router";
 import "./style.css";
-import { GetHeroDetails } from './get-hero-details';
-import { GetHeroImage } from './get-hero-image';
+import { GetAllHeroDetails, AllHeroDetails } from './get-all-heroes';
+import HeroDetails from './hero-details';
 
 function Hero() {
-    const location = useLocation();
-    const hero = location.state.name;
-    const [description, setDescription] = useState("");
-    const [image, setImage] = useState("");
+    const [heroes, setHeroes] = useState<AllHeroDetails[]>([]);
 
     useEffect(() => {
-        GetHeroDetails(hero).then((details) => {
+        GetAllHeroDetails().then((details) => {
             console.log("Hero details response:", details);
-            setDescription(details.description);
+            setHeroes(details);
         });
-    }, [hero]);
-
-    useEffect(() => {
-        GetHeroImage(hero).then((details) => {
-            setImage(details);
-        });
-    }, [hero]);
+    }, []);
 
     return (
-        <div className="hero">
-            <h1 className="txt-hero"> {hero}</h1>
-            <div className="hero-details">
-                <div className="txt-hero-description">
-                    {description.split("\n").map((part, i) => (
-                        <h2 key={i}>{part}<br /></h2>
-                    ))}
-                </div>
-                <img className="img-hero" src={image} alt="img-hero" />
-            </div>
+        <div className="heroes">
+            {heroes
+                .sort((a, b) => a.name > b.name ? 1 : -1)
+                .map((hero, index) => (
+                    <HeroDetails key={hero.name} hero={hero} index={index} />
+                ))}
         </div>
     );
 }

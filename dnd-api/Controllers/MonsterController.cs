@@ -17,6 +17,45 @@ public class MonsterController : ControllerBase
         _db = db;
     }
 
+    [HttpGet("all")]
+    public IActionResult GetAllMonsters()
+    {
+        var monstersData = _db.Monsters
+            .Include(m => m.Stats)
+            .Include(m => m.Attributes)
+            .ToList();
+
+        if (!monstersData.Any())
+        {
+            return NotFound($"No monsters were not found");
+        }
+
+        var result = monstersData.Select(m => new MonsterData
+        {
+            Name = m.Name,
+            Type = m.Type,
+            Size = m.Size,
+            Description = m.Description,
+            Stats = new Stats
+            {
+                ArmorClass = m.Stats.ArmorClass,
+                HitPoints = m.Stats.HitPoints,
+                Speed = m.Stats.Speed
+            },
+            Attributes = new Attributes
+            {
+                Strenth = m.Attributes.Strenth,
+                Dexterity = m.Attributes.Dexterity,
+                Constitution = m.Attributes.Constitution,
+                Intelligence = m.Attributes.Intelligence,
+                Wisdom = m.Attributes.Wisdom,
+                Charisma = m.Attributes.Charisma
+            }
+        }).ToList();
+
+        return Ok(result);
+    }
+
     [HttpGet]
     public IActionResult GetMonsters([FromQuery] MonsterSize? size)
     {

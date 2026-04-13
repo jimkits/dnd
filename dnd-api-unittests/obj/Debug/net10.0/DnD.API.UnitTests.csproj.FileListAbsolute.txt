@@ -155,8 +155,6 @@ C:\git\dnd\dnd-api-unittests\bin\Debug\net10.0\FluentAssertions.dll
 C:\git\dnd\dnd-api-unittests\bin\Debug\net10.0\Data\Images\img-hero-cleric.png
 C:\git\dnd\dnd-api-unittests\bin\Debug\net10.0\Data\Images\img-hero-fighter.png
 C:\git\dnd\dnd-api-unittests\bin\Debug\net10.0\Data\Images\img-hero-not-found.jpg
-C:\git\dnd\dnd-api-unittests\bin\Debug\net10.0\Data\Images\img-rogue.png
-C:\git\dnd\dnd-api-unittests\bin\Debug\net10.0\Data\Images\img-sorcerer.png
 C:\git\dnd\dnd-api-unittests\bin\Debug\net10.0\Castle.Core.dll
 C:\git\dnd\dnd-api-unittests\bin\Debug\net10.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\git\dnd\dnd-api-unittests\bin\Debug\net10.0\Microsoft.IdentityModel.Abstractions.dll
@@ -167,3 +165,5 @@ C:\git\dnd\dnd-api-unittests\bin\Debug\net10.0\Microsoft.IdentityModel.Protocols
 C:\git\dnd\dnd-api-unittests\bin\Debug\net10.0\Microsoft.IdentityModel.Tokens.dll
 C:\git\dnd\dnd-api-unittests\bin\Debug\net10.0\Moq.dll
 C:\git\dnd\dnd-api-unittests\bin\Debug\net10.0\System.IdentityModel.Tokens.Jwt.dll
+C:\git\dnd\dnd-api-unittests\bin\Debug\net10.0\Data\Images\img-hero-rogue.png
+C:\git\dnd\dnd-api-unittests\bin\Debug\net10.0\Data\Images\img-hero-sorcerer.png

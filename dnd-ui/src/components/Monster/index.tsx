@@ -1,24 +1,23 @@
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router";
 import "./style.css";
-import { GetMonsterDetails, MonstersDetails } from "./get-monsters";
+import { GetAllMonsterDetails, MonstersDetails } from "./get-all-monsters";
 import MonsterDetails from "./monster-details";
 
 function Monster() {
-    const location = useLocation();
-    const monsterSize = location.state.name;
     const [monsters, setMonsters] = useState<MonstersDetails[]>([]);
 
     useEffect(() => {
-        GetMonsterDetails(monsterSize).then(setMonsters);
-    }, [monsterSize]);
+        GetAllMonsterDetails().then(setMonsters);
+    }, []);
 
     return (
         <div className="monster-list">
-            <h1>{`${monsterSize} Monsters`}</h1>
-            {monsters.map((monster) => (
-                <MonsterDetails key={monster.name} monster={monster} />
-            ))}
+            <h1>Monsters</h1>
+            {monsters
+                .sort((a, b) => a.name > b.name ? 1 : -1)
+                .map((monster, index) => (
+                    <MonsterDetails key={monster.name} monster={monster} index={index} />
+                ))}
         </div>
     );
 }

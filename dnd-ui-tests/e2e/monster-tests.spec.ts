@@ -4,9 +4,6 @@ test.describe('Monster Tests', () => {
     const baseUrl: string = process.env.BASE_URL!;
 
     test.beforeEach(async ({ page }) => {
-        // await page.addInitScript(() => {
-        //     localStorage.setItem('loggedIn', 'true');
-        // });
         await page.goto(baseUrl);
     });
 
@@ -14,18 +11,16 @@ test.describe('Monster Tests', () => {
         page.close();
     });
 
-    ['Small', 'Medium', 'Large'].forEach((size) => {
-        test(`User navigates to ${size} monsters page`,
-            { tag: ['@smoke', '@regression'] },
-            async ({ navigationPage: landingPage, monsterPage }) => {
-            // Act
-            await landingPage.navigateToMonster(size);
+    test('User navigates to the monsters page',
+        { tag: ['@smoke', '@regression'] },
+        async ({ navigationPage: landingPage, monsterPage }) => {
+        // Act
+        await landingPage.navigateToMonsters();
 
-            // Assert
-            await test.step(`verify ${size} monsters page is displayed`, async () => {
-                await expect(monsterPage.monsterTitle).toHaveText(`${size} Monsters`);
-                await expect(monsterPage.monsterList).not.toBeNull();
-            });
+        // Assert
+        await test.step('verify monsters are displayed', async () => {
+            await expect(monsterPage.monsterName.first()).toBeVisible();
+            await expect(monsterPage.monsterDescription.first()).toBeVisible();
         });
     });
 });
