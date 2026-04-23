@@ -13,7 +13,7 @@ function HeroDetails({ hero, index }: Props) {
             <h1 className='hero-name'>{hero.name}</h1>
             <div className='hero-information' style={{ flexDirection: index % 2 === 0 ? 'row' : 'row-reverse' }}>
                 <p className='hero-description'>{hero.description}</p>
-                <img className='hero-image' src={`data:image/png;base64,${hero.image}`} alt='hero-image' />
+                <img className='hero-image' src={hero.image.startsWith('/') ? hero.image : `data:image/png;base64,${hero.image}`} alt='hero-image' />
             </div>
         </>
     );

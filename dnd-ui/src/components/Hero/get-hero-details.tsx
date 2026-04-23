@@ -1,9 +1,17 @@
+import config from "../../config";
+import localHeroes from "../../data/heroes.json";
+
 export interface HeroDetails {
     name: string;
     description: string;
 }
 
 export async function GetHeroDetails(hero: string): Promise<HeroDetails> {
+    if (!config.connectToBackEnd) {
+        const found = localHeroes.find(h => h.name === hero);
+        return found ?? { name: hero, description: "Hero not found." };
+    }
+
     const apiOffline = "The scrolls remain silent... no tale of this hero has been found. Scholars have searched every dusty archive and forgotten library, yet not a single parchment bears their name. If this hero ever walked these lands, their story has been lost to the ages.";
     try {
         const token = localStorage.getItem("token");

@@ -1,4 +1,13 @@
+import config from "../../config";
+import generateOfflineToken from "./generate-offline-token";
+
 export async function validateLogin(username: string, password: string): Promise<{ success: boolean; message: string; token?: string }> {
+    if (!config.connectToBackEnd) {
+        if (username === config.offlineCredentials.username && password === config.offlineCredentials.password)
+            return { success: true, message: "Logged in", token: generateOfflineToken() };
+        return { success: false, message: "Invalid username or password" };
+    }
+
     try {
         const response = await fetch("http://localhost:5071/api/login", {
             method: "POST",

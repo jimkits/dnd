@@ -27,7 +27,7 @@ function Header() {
                     WaitToSetState(setClicked, false, 900);
                     setNavOpen(!navOpen);
                 }}>
-                <img className="img-dragon-eye" src={navButtonImage} alt="dragons-eye" />
+                <img key={navButtonImage} className="img-dragon-eye" src={navButtonImage} alt="dragons-eye" />
             </button>
         </>
     );

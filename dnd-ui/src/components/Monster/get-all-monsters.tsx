@@ -1,3 +1,6 @@
+import config from "../../config";
+import localMonsters from "../../data/monsters.json";
+
 export interface MonstersDetails {
     name: string;
     description: string;
@@ -18,6 +21,9 @@ export interface MonstersDetails {
 
 
 export async function GetAllMonsterDetails(): Promise<MonstersDetails[]> {
+    if (!config.connectToBackEnd)
+        return localMonsters;
+
     const apiOffline = "The scrying orb grows dark. Whether by powerful magic or a rift in the planes, no monsters can be conjured from this realm at this time.";
 
     try {
