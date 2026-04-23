@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import { validateLogin } from "./validate-login";
+import config from "../../config";
 import "./style.css";
 
 function Login({ setLoggedIn }: { setLoggedIn: (value: boolean) => void }) {
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
+    const [username, setUsername] = useState(config.connectToBackEnd ? "" : config.offlineCredentials.username);
+    const [password, setPassword] = useState(config.connectToBackEnd ? "" : config.offlineCredentials.password);
     const [error, setError] = useState("");
     const navigate = useNavigate();
 
