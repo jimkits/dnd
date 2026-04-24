@@ -7,7 +7,7 @@
 }
 
 .flex-centre-top{
-  height:250px;
+  height:25vmin;
   width: 100%;
   text-align: center;
   align-self: flex-start;
@@ -17,14 +17,9 @@
   align-content: center;
 }
 
-.img-header-logo{
-  height: 200px;
-  margin-top: 20px;
-  align-self: flex-start;
-}
-
 .img-header-image{
-  height: 250px;
+  width: 60vmin;
+  height: auto;
   align-self: auto;
 }
 
@@ -32,15 +27,24 @@
   background-color: #1a1209;
   outline: 0;
   border: none;
+  align-self: flex-start;
+  margin-top: 3vmin;
 }
 
 .img-dragon-eye{
-  width: 150px;
-  height: 150px;
+  width: 13vmin;
+  height: auto;
+}
+
+.logo{
+  width: 15vmin;
+  height: auto;
+  align-self: flex-start;
+  margin-top: 2vmin;
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .img-header-logo {
+  .logo {
     animation: App-logo-spin infinite 20s linear;
   }
 }

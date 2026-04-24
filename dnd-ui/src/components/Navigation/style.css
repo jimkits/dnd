@@ -15,16 +15,17 @@
   text-decoration: none;
 }
 
-.nav-link:hover h2{
-  color: #C08423;
+.nav-link span{
+  font-size: 1.7vmin;
+  font-weight: bold;
+  margin-top: 1vmin;
+  margin-bottom: 1vmin;
+  margin-left: 1vmin;
+  display: block;
+  text-decoration: none;
+  color: #f0e6d0;
 }
 
-.nav-button{
-  outline: none;
-  border: none;
-  background-color: #3d0a0a;
-}
-
-.nav-button h2{
+.nav-link:hover span{
   color: #C08423;
 }

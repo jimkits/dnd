@@ -1,5 +1,4 @@
 import './style.css';
-import dragon from "../../assets/img-dragon.gif"
 
 function Home() {
     return (
@@ -12,7 +11,7 @@ function Home() {
                 Dungeons and Dragons
             </h1>
             <br />
-            <img className='img-dragon' src={dragon} alt="dragon" />
+            <img className='img-dragon' src="/images/img-dragon.gif" alt="dragon" />
         </>
     );
 }

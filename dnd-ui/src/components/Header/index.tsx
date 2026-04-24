@@ -2,23 +2,18 @@ import { useState } from 'react';
 import './style.css';
 import { Link } from 'react-router';
 import WaitToSetState from '../../helpers/WaitToSetState';
-import ImgHeader from "../../assets/img-header.png"
-import ImgLogo from '../../assets/img-header-logo.png';
-import redDragonEyeOpening from "../../assets/img-red-dragon-eye-opening.gif"
-import redDragonEyeClosing from "../../assets/img-red-dragon-eye-closing.gif"
 
 function Header() {
     const [clicked, setClicked] = useState(false);
     const [navOpen, setNavOpen] = useState(false);
-    // const navSidebarName = navOpen ? "nav-sidebar-open" : "nav-sidebar-closed";
-    const navButtonImage = navOpen ? redDragonEyeOpening : redDragonEyeClosing;
+    const navButtonImage = navOpen ? "/images/img-red-dragon-eye-opening.gif" : "/images/img-red-dragon-eye-closing.gif";
 
     return (
         <>
-            <img src={ImgLogo} className="img-header-logo" alt="img-header-logo" />
+            <img className="logo" alt="img-header-logo" src="/images/img-header-logo.png" />
 
             <Link key='Home' to='/'>
-                <img src={ImgHeader} className="img-header-image" alt="img-header-main" />
+                <img className="img-header-image" alt="img-header-main" src="/images/img-header.png" />
             </Link>
 
             <button type="button" className="btn-dragon-eye" disabled={clicked}
