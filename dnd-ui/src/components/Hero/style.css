@@ -7,6 +7,17 @@
 .hero-name{
     text-align: left;
     width: 120vmin;
+    margin-bottom: 20px;
+}
+
+.hero-book{
+    text-align: left;
+    width: 120vmin;
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    gap: 8px;
+    margin-bottom: 20px;
 }
 
 .hero-information{
@@ -14,14 +25,68 @@
     align-self: center;
     display: flex;
     flex-direction: row;
+    gap: 20px;
+}
+
+.hero-text{
+    text-align: justify;
+    border-top: 1px solid rgba(192, 132, 35, 0.5);
+    flex: 1;
 }
 
 .hero-description{
     text-align: justify;
     flex: 1;
+    margin-bottom: 20px;
+}
+
+.hero-core-traits{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border-top: 1px solid rgba(192, 132, 35, 0.5);
+    padding-top: 20px;
+}
+
+.hero-equipment-grid{
+    grid-template-columns: 1fr;
+}
+
+.hero-traits-row{
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.hero-trait-full{
+    grid-column: 1 / -1;
+}
+
+.hero-trait-label{
+    font-size: 15px;
+    letter-spacing: 1px;
+    color: #C08423;
+    white-space: nowrap;
+    flex-shrink: 0;
+    text-transform: uppercase;
+}
+
+.hero-trait-value{
+    font-size: 15px;
+    color: #f0e6d0;
 }
 
 .hero-image{
     height: 600px;
     width: 400px;
+}
+
+.hero-equipment-header{
+    font-size: 15px;
+    letter-spacing: 2px;
+    color: #C08423;
+    text-transform: uppercase;
+    margin-bottom: 20px;
 }
