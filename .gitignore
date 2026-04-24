@@ -3,6 +3,10 @@
 # .NET build output
 dnd-api/bin/
 dnd-api/obj/
+dnd-api-integrationtests/bin/
+dnd-api-integrationtests/obj/
+dnd-api-unittests/bin/
+dnd-api-unittests/obj/
 
 # SQLite database
 dnd-api/dnd.db*

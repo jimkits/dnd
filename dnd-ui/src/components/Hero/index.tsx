@@ -19,11 +19,11 @@ function Hero() {
 
     return (
         <div className="heroes">
-            <div className="hero-search-row">
-                <div className="hero-search-wrapper">
-                    <span className="hero-search-icon">⌕</span>
+            <div className="search">
+                <div className="search-wrapper">
+                    <span className="search-icon">⌕</span>
                     <input
-                        className="hero-search"
+                        className="search-text"
                         type="text"
                         placeholder="Search heroes..."
                         value={searchTerm}
