@@ -4,6 +4,45 @@
     align-items: center;
 }
 
+.hero-search-row{
+    width: 120vmin;
+    margin-top: 20px;
+    margin-bottom: 5px;
+}
+
+.hero-search-wrapper{
+    width: 20vmin;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border: 1px solid #C08423;
+    border-radius: 3px;
+    background: rgba(192, 132, 35, 0.06);
+    padding: 10px 16px;
+}
+
+.hero-search-icon{
+    font-size: 22px;
+    color: #C08423;
+    line-height: 1;
+    user-select: none;
+}
+
+.hero-search{
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: #f0e6d0;
+    font-size: 16px;
+    letter-spacing: 1px;
+    outline: none;
+}
+
+.hero-search::placeholder{
+    color: rgba(240, 230, 208, 0.35);
+    letter-spacing: 1px;
+}
+
 .hero-name{
     text-align: left;
     width: 120vmin;
