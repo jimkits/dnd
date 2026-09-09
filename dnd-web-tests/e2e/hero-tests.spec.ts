@@ -10,7 +10,7 @@ test.describe('Hero Tests', () => {
     });
 
     test('User navigates to the heroes page',
-        { tag: ['@smoke', '@regression', '@prod'] },
+        { tag: ['@smoke', '@regression'] },
         async ({ navigationPage: landingPage, heroPage }) => {
         // Act
         await landingPage.navigateToHeroes();

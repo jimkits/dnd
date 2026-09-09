@@ -84,6 +84,7 @@ page-objects/
 | --------------------- | -------------------------------------------------------------- |
 | "Browser not found"   | Run `npx playwright install firefox`                          |
 | Hero/monster tests fail | Ensure both the UI and API are running before starting tests |
+| `install` fails with "Playwright does not support firefox on ubuntuXX.XX-x64" | Your OS is too new for this Playwright version to recognize. Override the detected platform to the closest supported release, e.g. `PLAYWRIGHT_HOST_PLATFORM_OVERRIDE=ubuntu24.04-x64 npx playwright install firefox` |
 
 ## License
 

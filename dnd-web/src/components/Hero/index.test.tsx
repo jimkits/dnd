@@ -80,7 +80,7 @@ describe('Hero', () => {
         render(<Hero />);
         await screen.findByText(name);
 
-        const image = screen.getByAltText('hero-image') as HTMLImageElement;
+        const image = screen.getByAltText(`${name} portrait`) as HTMLImageElement;
         expect(image.src).toContain(`/heroes/${encodeURIComponent(name)}/portrait`);
     });
 

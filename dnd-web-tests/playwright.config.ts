@@ -17,7 +17,8 @@ export default defineConfig({
   ],
 
   use: {
-    baseURL: process.env.BASE_URL,
+    // baseURL: process.env.BASE_URL,
+    baseURL: 'https://dnd-compendium-db.vercel.app/',
     trace: 'on-first-retry',
   },
 

@@ -51,24 +51,18 @@
 /* Hero display */
 
 .hero{
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
+    display: flow-root;
     box-sizing: border-box;
     width: 100%;
     max-width: 100vmin;
 }
 
 .details{
-    align-items: left;
     width: 100%;
-    display: flex;
-    flex-direction: column;
-    padding: 0 0 0 0px;
-    margin-right: 10px;
 }
 
 .name{
+    display: block;
     text-align: left;
     color: #C08423;
     font-size: 4vmin;
@@ -113,6 +107,7 @@
 }
 
 .divider{
+    overflow: visible;
     border: none;
     height: 1px;
     background: linear-gradient(to right, transparent, rgba(192, 132, 35, 0.7), transparent);
@@ -121,17 +116,18 @@
 }
 
 .image{
-    width: 40vmin;
+    width: 28.5vmin;
     height: auto;
     overflow: hidden;
+    margin: 0 20px 10px 20px;
 }
 
 .description{
+    display: block;
     color: #f0e6d0;
     text-align: justify;
     font-size: 1.4vmin;
     width: 100%;
-    max-width: 100vmin;
 }
 
 .error-message{
